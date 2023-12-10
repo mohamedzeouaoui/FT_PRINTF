@@ -1,0 +1,78 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzeouaou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/07 21:05:01 by mzeouaou          #+#    #+#             */
+/*   Updated: 2023/12/07 21:05:05 by mzeouaou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+#include <stdarg.h>
+
+int fonc_25line(int i,const char *str, va_list args, int *j)
+{
+    int tmp;
+
+    tmp = *j;
+    if(str[i] == '%' && (str[i + 1] == 'd' || str[i + 1] == 'i'))
+        *j += ft_putnbr(va_arg(args, int));
+    else if(str[i] == '%' && str[i + 1] == 'c')
+        *j += ft_putchar(va_arg(args, int));
+    else if(str[i] == '%' && str[i + 1] == 's')
+        *j += ft_putstr(va_arg(args, char *));
+    else if (str[i] == '%' && (str[i + 1] == 'x' || str[i + 1] == 'X'))
+        *j += ft_putnbr_base(va_arg(args, int), str[i + 1]);
+    else if (str[i] == '%' && str[i + 1] == 'p')
+        *j += ft_putp(va_arg(args, unsigned long));
+    else if (str[i] == '%' && str[i + 1] == 'u')
+        *j += ft_putnbr_u(va_arg(args, unsigned int));
+    else if (str[i] == '%' && str[i + 1] == '%')
+        *j += ft_putchar('%');
+    if (tmp != *j)
+        return (1);
+    return (-1);
+}
+
+int ft_printf(const char *str, ...)
+{
+    va_list args;
+    int i;
+    int j;
+    int checker;
+
+    j = 0;
+    i = 0;
+    va_start(args, str);
+    while (str[i] != '\0')
+    {
+        checker = fonc_25line(i, str, args, &j);
+        if (checker == -1)
+        {
+            ft_putchar(str[i++]);
+            j++;
+            checker = 1;
+        }
+        else
+            i += 2;
+    }
+    va_end(args);
+    return(j);
+}
+
+// #include <stdio.h>
+
+// int main()
+// {
+//     int l;
+//     // l = ft_printf("%p", &l);
+//     // ft_printf("\nme : %d", l);orld\n %p   , &l
+
+//     l = ft_printf("mohamed %% ali %i %xuck %s the %corld\n%p", 12, 15, "all", 'W', &l);
+//     printf("\nhe : %d", l);
+
+//     return 0;
+// }
