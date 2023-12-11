@@ -11,26 +11,25 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 // #include <stdio.h>
 
-int counte(unsigned int nb)
+int	counte(unsigned int nb)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    
-    while (nb > 9)
-    {
-        nb = nb / 10;
-        i++;
-    }
-    i = i + 1;
-    return(i);
+	i = 0;
+	while (nb > 9)
+	{
+		nb = nb / 10;
+		i++;
+	}
+	i = i + 1;
+	return (i);
 }
 
 void	ft_put_u(unsigned int nb)
 {
-	
 	if (nb >= 0 && nb <= 9)
 	{
 		ft_putchar(nb + 48);
@@ -43,11 +42,11 @@ void	ft_put_u(unsigned int nb)
 	}
 }
 
-int ft_putnbr_u(unsigned int nb)
+int	ft_putnbr_u(unsigned int nb)
 {
-    unsigned int cmp;
+	unsigned int	cmp;
 
-    cmp = counte(nb);
-    ft_put_u(nb);
-    return (cmp);
+	cmp = counte(nb);
+	ft_put_u(nb);
+	return (cmp);
 }

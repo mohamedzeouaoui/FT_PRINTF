@@ -11,27 +11,28 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 // #include <stdio.h>
 
-int count(long nb)
+int	count(long nb)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (nb == -2147483648)
-        return(11);
-    if (nb < 0)
-    {
-        nb *= -1;
-        i = i + 1;
-    }
-    while (nb > 9)
-    {
-        nb = nb / 10;
-        i++;
-    }
-    i = i + 1;
-    return(i);
+	i = 0;
+	if (nb == -2147483648)
+		return (11);
+	if (nb < 0)
+	{
+		nb *= -1;
+		i = i + 1;
+	}
+	while (nb > 9)
+	{
+		nb = nb / 10;
+		i++;
+	}
+	i = i + 1;
+	return (i);
 }
 
 void	ft_put(long nb)
@@ -53,20 +54,20 @@ void	ft_put(long nb)
 	}
 }
 
-int ft_putnbr(int nb)
+int	ft_putnbr(int nb)
 {
-    int cmp;
+	int	cmp;
 
-    cmp = count(nb);
-    ft_put(nb);
-    return (cmp);
+	cmp = count(nb);
+	ft_put(nb);
+	return (cmp);
 }
 
 // int main()
 // {
 //     int n;
 //     int l;
-    
+
 //     printf("\n%d", ft_putnbr(-2147483648));
-//     return 0;
+//     return (0);
 // }
