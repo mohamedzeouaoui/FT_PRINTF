@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzeouaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -32,6 +32,8 @@ int	fonc_25line(int i, const char *str, va_list args, int *j)
 		tmp = ft_putnbr_u(va_arg(args, unsigned int));
 	else if (str[i] == '%' && str[i + 1] == '%')
 		tmp = ft_putchar('%');
+	else if (str[i] == '%' && str[i + 1] == '\0')
+		return (-2);
 	if (tmp >= 0)
 	{
 		*j += tmp;
@@ -47,36 +49,36 @@ int	ft_printf(const char *str, ...)
 	int		j;
 	int		checker;
 
+	if (str == NULL)
+		return (-1);
 	j = 0;
 	i = 0;
 	va_start(args, str);
 	while (str[i] != '\0')
 	{
+		checker = -1;
 		checker = fonc_25line(i, str, args, &j);
-		if (checker == -1)
+		if (checker == -2)
+			return (-1);
+		else if (checker == -1)
 		{
 			ft_putchar(str[i++]);
 			j++;
-			checker = 1;
 		}
 		else
 			i += 2;
 	}
-	va_end(args);
-	return (j);
+	return (va_end(args), j);
 }
 
 // #include <stdio.h>
-
 // int main()
 // {
 //     int l;
 //     // l = ft_printf("%p", &l);
 //     // ft_printf("\nme : %d", l);orld\n %p   , &l
-
 //     l = ft_printf("mohamed %% ali %i %xuck %s the %corld\n%p", 12, 15, "all",
-		// 'W', &l);
+// 'W', &l);
 //     printf("\nhe : %d", l);
-
 //     return (0);
 // }

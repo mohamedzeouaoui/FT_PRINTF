@@ -34,17 +34,14 @@ int	conte(unsigned long nb)
 
 void	ft_putp_base(unsigned long nb)
 {
-	char	*base;
-
-	base = "0123456789abcdef";
 	if (nb < 16)
 	{
-		ft_putchar(base[nb]);
+		ft_putchar("0123456789abcdef"[nb]);
 	}
 	else
 	{
 		ft_putp_base(nb / 16);
-		ft_putchar(base[nb % 16]);
+		ft_putchar("0123456789abcdef"[nb % 16]);
 	}
 }
 
